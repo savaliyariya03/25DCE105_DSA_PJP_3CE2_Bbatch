@@ -1,0 +1,1 @@
+In this practical i face array shifting problem. First i shift all elements to left side but at the end time last index is empty. then i store first element into temp variable and shift all elements left side and then assign last index element as temp. 
