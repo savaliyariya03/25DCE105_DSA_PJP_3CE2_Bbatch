@@ -1,1 +1,0 @@
-In practical two I face that in binary search loop runs infinite time because I forget to break the loop and in recursive I had some problem but now it solved by lec. 
