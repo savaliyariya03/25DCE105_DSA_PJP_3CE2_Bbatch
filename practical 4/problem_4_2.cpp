@@ -5,16 +5,6 @@ struct Node
     int data;
     struct Node* next;
 };
-void printReverse(struct Node* head)
-{
-    if(head == nullptr)
-    {
-        return;
-    }
-    printReverse(head->next);
-    cout<<head->data<<" -> ";
-}
-
 int main()
 {
     int choice;
