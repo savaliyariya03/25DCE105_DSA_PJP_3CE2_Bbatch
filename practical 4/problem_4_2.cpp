@@ -1,22 +1,22 @@
 #include <iostream>
-#include <cstdlib>
-
 using namespace std;
-
-struct Node {
+struct Node
+{
     int data;
     struct Node* next;
 };
-
-void printReverse(struct Node* head) {
-    if (head == nullptr) {
+void printReverse(struct Node* head)
+{
+    if(head == nullptr)
+    {
         return;
     }
     printReverse(head->next);
-    cout << head->data << " -> ";
+    cout<<head->data<<" -> ";
 }
 
-int main() {
+int main()
+{
     int choice;
     struct Node* Node1 = (struct Node*)malloc(sizeof(struct Node));
     struct Node* Node2 = (struct Node*)malloc(sizeof(struct Node));
@@ -33,74 +33,90 @@ int main() {
 
     struct Node* head = Node1;
 
-    cout << "1. Delete patient by Token ID\n";
-    cout << "2. Forward Traversal (Front to Back)\n";
-    cout << "3. Reverse Traversal (Last to First)\n";
-    cout << "4. Exit\n";
-
+    cout<<"1. Delete patient by Token ID\n";
+    cout<<"2. Forward Traversal (Front to Back)\n";
+    cout<<"3. Reverse Traversal (Last to First)\n";
+    cout<<"4. Exit\n";
     do {
-        cout << "\nEnter choice: ";
-        cin >> choice;
-
-        switch (choice) {
-            case 1: {
+        cout<<"\nEnter your choice: ";
+        cin>>choice;
+        switch(choice)
+        {
+            case 1:
+            {
                 int key;
-                cout << "Enter patient ID to delete: ";
-                cin >> key;
-
-                if (head == nullptr) {
-                    cout << "Queue is empty!\n";
+                cout<<"Enter patient ID to delete: ";
+                cin>>key;
+                if (head == nullptr)
+                {
+                    cout<<"Queue is empty!\n";
                     break;
                 }
-
-                if (head->data == key) {
+                if (head->data == key)
+                {
                     struct Node* toDelete = head;
                     head = head->next;
                     free(toDelete);
-                    cout << "Patient " << key << " deleted.\n";
-                } else {
+                    cout<<"Patient "<<key<<" deleted.\n";
+                }
+                else
+                {
                     struct Node* temp = head;
-                    while (temp->next != nullptr && temp->next->data != key) {
+                    while(temp->next != nullptr && temp->next->data != key) {
                         temp = temp->next;
                     }
-
-                    if (temp->next == nullptr) {
-                        cout << "Patient ID not found!\n";
-                    } else {
+                    if (temp->next == nullptr)
+                    {
+                        cout<<"Patient ID not found!\n";
+                    }
+                    else
+                    {
                         struct Node* toDelete = temp->next;
                         temp->next = temp->next->next;
                         free(toDelete);
-                        cout << "Patient " << key << " deleted.\n";
+                        cout<<"Patient "<<key<<" deleted.\n";
                     }
                 }
                 break;
             }
-
-            case 2: {
-                cout << "Queue (Front to Back): ";
+            case 2:
+            {
+                cout<<"Queue (Front to Back): ";
                 struct Node* travel = head;
-                while (travel != nullptr) {
-                    cout << travel->data << " -> ";
+                while (travel != nullptr)
+                {
+                    cout<<travel->data<<" -> ";
                     travel = travel->next;
                 }
-                cout << "NULL\n";
+                cout<<"NULL\n";
                 break;
             }
-
-            case 3: {
-                cout << "Queue (Last to First): ";
-                printReverse(head);
-                cout << "NULL\n";
+            case 3:
+            {
+                cout<<"Queue (Back to Front): ";
+                struct Node *prev = NULL, *curr = head, *next = NULL;
+                while (curr != NULL)
+                {
+                    next = curr->next;
+                    curr->next = prev;
+                    prev = curr;
+                    curr = next;
+                }
+                head = prev;
+                struct Node* travel = head;
+                while (travel != nullptr)
+                {
+                    cout<<travel->data<<" -> ";
+                    travel = travel->next;
+                }
+                cout<<"NULL\n";
                 break;
             }
-
             case 4:
                 break;
-
             default:
                 cout << "Invalid choice!\n";
         }
     } while (choice != 4);
-
     return 0;
 }
